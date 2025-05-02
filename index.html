@@ -6,76 +6,126 @@
   <title>Your Name | Portfolio</title>
   <style>
     :root {
-      --bg: #ffffff;
-      --text: #1a1a1a;
-      --accent: #0066ff;
+      /* tasteful light theme */
+      --bg: #f9fafb;
+      --text: #1b1b1b;
+      --accent: #0077cc;
+      --accent-light: #e6f2fd;
     }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111213;
+        --text: #f0f0f0;
+        --accent: #3a9dff;
+        --accent-light: rgba(58, 157, 255, 0.15);
+      }
+    }
+
+    /* global resets */
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
     }
+
+    /* header / nav */
     header {
-      width: 100%;
-      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--bg);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+    header strong { font-size: 1.1rem; }
     nav a {
-      margin-left: 1.5rem;
+      margin-left: 1.25rem;
       text-decoration: none;
       color: var(--text);
       font-weight: 500;
-      transition: color 0.2s ease;
+      position: relative;
     }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      height: 2px;
+      width: 100%;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.2s ease;
+    }
+    nav a:hover::after { transform: scaleX(1); transform-origin: left; }
     nav a:hover { color: var(--accent); }
+
+    /* hero */
     .hero {
       padding: 6rem 2rem 4rem;
       text-align: center;
+      max-width: 780px;
+      margin: 0 auto;
     }
-    .hero h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+    .hero h1 { font-size: 3rem; margin-bottom: 0.75rem; }
     .hero p { font-size: 1.25rem; color: #555; }
-    section { max-width: 760px; margin: 0 auto; padding: 3rem 2rem; }
-    h2 { font-size: 1.75rem; margin-bottom: 1rem; color: var(--accent); }
+
+    /* generic section styling */
+    section { max-width: 780px; margin: 0 auto; padding: 4rem 2rem; }
+    h2 { font-size: 1.9rem; margin-bottom: 1.25rem; color: var(--accent); }
+
+    /* cards */
     .card {
+      background: var(--accent-light);
       border-left: 4px solid var(--accent);
-      padding-left: 1rem;
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
       margin-bottom: 1.5rem;
     }
+    .card h3 { margin-bottom: 0.25rem; }
+
+    /* blog list */
+    .blog-post {
+      margin-bottom: 1rem;
+    }
+    .blog-post a { color: var(--accent); text-decoration: none; }
+    .blog-post a:hover { text-decoration: underline; }
+
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 3rem 2rem 2rem;
       font-size: 0.9rem;
       color: #777;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #0d0d0d;
-        --text: #f5f5f5;
-        --accent: #3a8fff;
-      }
     }
   </style>
 </head>
 <body>
   <header>
-    <span><strong>Your Name</strong></span>
+    <strong>Your Name</strong>
     <nav>
-      <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/your-username" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#resume">Résumé</a>
+      <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
+    <!-- About / Hero -->
+    <section id="about" class="hero">
       <h1>Hello, I'm Your Name.</h1>
       <p>Software engineer &amp; math enthusiast focused on clean, efficient solutions.</p>
     </section>
 
+    <!-- Projects -->
     <section id="projects">
       <h2>Projects</h2>
       <div class="card">
@@ -84,13 +134,30 @@
       </div>
       <div class="card">
         <h3>Graph Algorithms Visualizer</h3>
-        <p>Interactive tool showcasing Dijkstra, Bellman‑Ford, and BFS/DFS on custom graphs.</p>
+        <p>Interactive tool showcasing Dijkstra, Bellman-Ford, and BFS/DFS on custom graphs.</p>
       </div>
     </section>
 
+    <!-- Résumé -->
+    <section id="resume">
+      <h2>Résumé</h2>
+      <p>Download my résumé as a PDF <a href="resume.pdf" target="_blank" rel="noopener">here</a>.</p>
+    </section>
+
+    <!-- Blog -->
+    <section id="blog">
+      <h2>Blog</h2>
+      <div class="blog-post"><a href="#">Building a Quadratic Sieve from Scratch</a> – Apr 2025</div>
+      <div class="blog-post"><a href="#">Category Theory &amp; the Chinese Remainder Theorem</a> – Mar 2025</div>
+      <div class="blog-post"><a href="#">Visualizing Dijkstra’s Algorithm</a> – Jan 2025</div>
+      <p style="margin-top:1rem;">(More posts coming soon.)</p>
+    </section>
+
+    <!-- Contact -->
     <section id="contact">
       <h2>Contact</h2>
       <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/your-username" target="_blank" rel="noopener">/your-username</a></p>
     </section>
   </main>
 
@@ -99,9 +166,7 @@
   </footer>
 
   <script>
-    // Update year automatically
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
-
